@@ -11,19 +11,19 @@ const roles = [
     name: 'Farmer',
     description: 'Find buyers for your crops and manage introductions.',
     icon: <Leaf className="h-10 w-10 text-primary" />,
-    href: '/farmer',
+    href: '/signup?role=farmer',
   },
   {
     name: 'Buyer',
     description: 'Discover available farmers using AI-powered matching.',
     icon: <ShoppingBag className="h-10 w-10 text-primary" />,
-    href: '/buyer',
+    href: '/signup?role=buyer',
   },
   {
     name: 'Coordinator',
     description: 'Manage leads and facilitate deals between stakeholders.',
     icon: <Briefcase className="h-10 w-10 text-primary" />,
-    href: '/coordinator',
+    href: '/signup?role=coordinator',
   },
 ];
 
@@ -39,6 +39,14 @@ export default function Home() {
               <Logo className="h-8 w-auto" />
               <span className="font-headline text-xl font-semibold">AgriMatch Connect</span>
             </Link>
+          </div>
+          <div className="flex gap-4">
+            <Button asChild variant="ghost">
+              <Link href="/login">Log in</Link>
+            </Button>
+            <Button asChild>
+              <Link href="/signup">Sign up</Link>
+            </Button>
           </div>
         </nav>
       </header>
@@ -66,7 +74,8 @@ export default function Home() {
             </div>
             
             <div className="mt-16 sm:mt-20">
-              <h2 className="text-center font-headline text-2xl font-semibold">Choose Your Role</h2>
+              <h2 className="text-center font-headline text-2xl font-semibold">Get Started</h2>
+              <p className="text-center mt-2 text-muted-foreground">Choose your role to sign up.</p>
               <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
                 {roles.map((role) => (
                   <Card key={role.name} className="group transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
@@ -82,7 +91,7 @@ export default function Home() {
                       <p className="text-muted-foreground">{role.description}</p>
                       <Button asChild variant="link" className="mt-4 p-0 font-semibold text-accent">
                         <Link href={role.href}>
-                          Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+                          Sign up as a {role.name} <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                       </Button>
                     </CardContent>

@@ -20,43 +20,43 @@ import {
   LogOut,
   ClipboardList,
   Search,
+  User,
 } from 'lucide-react';
 import { Separator } from './ui/separator';
 import { Button } from './ui/button';
+import { useAuth } from '@/hooks/use-auth';
 
 const farmerNav = [
   { href: '/farmer', icon: Search, label: 'Find Buyers' },
   { href: '/farmer/leads', icon: ClipboardList, label: 'My Leads' },
+  { href: '/profile', icon: User, label: 'My Profile' },
 ];
 
 const buyerNav = [
   { href: '/buyer', icon: Search, label: 'Find Farmers' },
+  { href: '/profile', icon: User, label: 'My Profile' },
 ];
 
 const coordinatorNav = [
   { href: '/coordinator', icon: Briefcase, label: 'Manage Leads' },
+  { href: '/profile', icon: User, label: 'My Profile' },
 ];
 
 const AppSidebar = () => {
   const pathname = usePathname();
-
-  const getRole = () => {
-    if (pathname.startsWith('/farmer')) return 'Farmer';
-    if (pathname.startsWith('/buyer')) return 'Buyer';
-    if (pathname.startsWith('/coordinator')) return 'Coordinator';
-    return 'Guest';
-  };
-
-  const role = getRole();
-  let navItems = buyerNav;
-  if (role === 'Farmer') navItems = farmerNav;
-  if (role === 'Coordinator') navItems = coordinatorNav;
+  const { userRole, logout } = useAuth();
   
-  const roleInfo = {
-    Farmer: { icon: Leaf, color: 'text-green-500' },
-    Buyer: { icon: ShoppingBag, color: 'text-blue-500' },
-    Coordinator: { icon: Briefcase, color: 'text-yellow-500' },
-    Guest: { icon: Home, color: 'text-gray-500' },
+  const role = userRole || 'Guest';
+
+  let navItems = buyerNav;
+  if (role === 'farmer') navItems = farmerNav;
+  if (role === 'coordinator') navItems = coordinatorNav;
+  
+  const roleInfo: {[key: string]: {icon: React.ElementType, color: string, name: string}} = {
+    farmer: { icon: Leaf, color: 'text-green-500', name: 'Farmer' },
+    buyer: { icon: ShoppingBag, color: 'text-blue-500', name: 'Buyer' },
+    coordinator: { icon: Briefcase, color: 'text-yellow-500', name: 'Coordinator' },
+    Guest: { icon: Home, color: 'text-gray-500', name: 'Guest' },
   }
   const CurrentRoleIcon = roleInfo[role].icon;
 
@@ -74,7 +74,7 @@ const AppSidebar = () => {
            <CurrentRoleIcon className={`h-6 w-6 ${roleInfo[role].color}`} />
            <div>
             <p className="text-sm font-semibold text-foreground">Current Role</p>
-            <p className="text-xs text-muted-foreground">{role}</p>
+            <p className="text-xs text-muted-foreground">{roleInfo[role].name}</p>
            </div>
         </div>
       </SidebarHeader>
@@ -97,11 +97,9 @@ const AppSidebar = () => {
       </SidebarContent>
       <SidebarFooter>
         <Separator className="my-2" />
-        <Button variant="ghost" className="w-full justify-start gap-2" asChild>
-          <Link href="/">
-            <LogOut />
-            <span>Switch Role</span>
-          </Link>
+        <Button variant="ghost" className="w-full justify-start gap-2" onClick={() => logout()}>
+          <LogOut />
+          <span>Log Out</span>
         </Button>
       </SidebarFooter>
     </>
