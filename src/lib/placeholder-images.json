@@ -1,3 +1,10 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-farm",
+      "description": "A vibrant green farm field under a blue sky, representing agriculture and growth.",
+      "imageUrl": "https://images.unsplash.com/photo-1560493676-04071c5f467b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmYXJtJTIwZmllbGR8ZW58MHx8fHwxNzY2OTE3MTAzfDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "farm field"
+    }
+  ]
 }
