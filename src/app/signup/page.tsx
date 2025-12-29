@@ -33,7 +33,7 @@ const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
   email: z.string().email('Invalid email address.'),
   password: z.string().min(6, 'Password must be at least 6 characters.'),
-  role: z.enum(['farmer', 'buyer', 'coordinator']),
+  role: z.enum(['farmer', 'buyer']),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -53,7 +53,7 @@ export default function SignupPage() {
       name: '',
       email: '',
       password: '',
-      role: (defaultRole as 'farmer' | 'buyer' | 'coordinator') ?? 'buyer',
+      role: (defaultRole === 'farmer' ? 'farmer' : 'buyer'),
     },
   });
 
@@ -82,7 +82,7 @@ export default function SignupPage() {
         <Card>
           <CardHeader>
             <CardTitle>Create an Account</CardTitle>
-            <CardDescription>Join our network of farmers, buyers, and coordinators.</CardDescription>
+            <CardDescription>Join our network of farmers and buyers.</CardDescription>
           </CardHeader>
           <CardContent>
             <Form {...form}>
@@ -147,7 +147,6 @@ export default function SignupPage() {
                         <SelectContent>
                           <SelectItem value="buyer">Buyer</SelectItem>
                           <SelectItem value="farmer">Farmer</SelectItem>
-                          <SelectItem value="coordinator">Coordinator</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

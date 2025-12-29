@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Briefcase, Leaf, ShoppingBag, ArrowRight } from 'lucide-react';
+import { Leaf, ShoppingBag, ArrowRight } from 'lucide-react';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,12 +18,6 @@ const roles = [
     description: 'Discover available farmers using AI-powered matching.',
     icon: <ShoppingBag className="h-10 w-10 text-primary" />,
     href: '/signup?role=buyer',
-  },
-  {
-    name: 'Coordinator',
-    description: 'Manage leads and facilitate deals between stakeholders.',
-    icon: <Briefcase className="h-10 w-10 text-primary" />,
-    href: '/signup?role=coordinator',
   },
 ];
 
@@ -76,7 +70,7 @@ export default function Home() {
             <div className="mt-16 sm:mt-20">
               <h2 className="text-center font-headline text-2xl font-semibold">Get Started</h2>
               <p className="text-center mt-2 text-muted-foreground">Choose your role to sign up.</p>
-              <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-3">
+              <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2">
                 {roles.map((role) => (
                   <Card key={role.name} className="group transform transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
                     <CardHeader>
