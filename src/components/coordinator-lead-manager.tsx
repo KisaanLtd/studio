@@ -24,7 +24,7 @@ import { toast } from '@/hooks/use-toast';
 
 const statuses: Lead['status'][] = ['New', 'Contacted', 'Negotiating', 'Closed', 'Lost'];
 
-const getStatusVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
+const getStatusVariant = (status: Lead['status']): "default" | "secondary" | "destructive" | "outline" => {
     switch (status) {
         case 'New':
             return 'outline';

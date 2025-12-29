@@ -1,4 +1,4 @@
-import { leads, buyers } from '@/lib/data';
+import { leads, buyers, type Lead } from '@/lib/data';
 import {
   Table,
   TableBody,
@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 
-const getStatusVariant = (status: string): "default" | "secondary" | "destructive" | "outline" => {
+const getStatusVariant = (status: Lead['status']): "default" | "secondary" | "destructive" | "outline" => {
     switch (status) {
         case 'New':
             return 'outline';
